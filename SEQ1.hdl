@@ -1,0 +1,25 @@
+CHIP SEQ1 {                                  
+				            
+      IN x[8];				     	
+      OUT y[8];                             
+                                             
+   PARTS:                                   
+                                                     
+     Not8(in=x,out=nx);                  
+     Not8(in=QA,out=nQA);
+     Not8(in=QB,out=nQB);
+
+     And8(a=nx,b=QA,out=ytemp);     					    
+     And8(a=ytemp,b=QB,out=y);     
+
+     / Xor8(a=QA,b=QB,out=Dt1);
+     And8(a=QB,b=x,out=DA);
+
+     DFF8(in=DA,out=QA);
+
+     And8(a=QA,b=nQB,out=BT1);
+     Or8(a=BT1,b=nx,out=DB);
+
+     DFF8(in=DB,out=QB);
+
+}

@@ -1,0 +1,12 @@
+CHIP SEQ2 {                                  
+				            
+      IN x[4];				     	
+      OUT y;                             
+                                             
+   PARTS:                                   
+                                                     
+    Or(a=x[0],b=x[3],out=t1);
+    And(a=x[1],b=x[2],out=t2);
+    Or(a=t1,b=t2,out=y);    
+
+}

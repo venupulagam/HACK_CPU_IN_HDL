@@ -1,0 +1,28 @@
+CHIP SEQ {                                  
+				            
+      IN x[16];				     	
+      OUT y[16];                             
+                                             
+   PARTS:                                   
+                                                     
+     Not16(in=x,out=nx);                     
+     Not16(in=QA,out=nQA);                   
+     Not16(in=QB,out=nQB);                   
+     					    
+     And16(a=x,b=nQA,out=Atemp1);         
+     And16(a=Atemp1,b=QB,out=AT1); 
+     And16(a=x,b=QA,out=Atemp2);   
+     
+     DFF16(in=DA,out=QA);
+     DFF16(in=DB,out=QB);
+     
+     And16(a=Atemp2,b=nQB,out=AT2); 
+     Or16(a=AT1,b=AT2,out=DA);      
+                                                                        
+     And16(a=QA,b=nQB,out=BT1); 
+     Or16(a=BT1,b=nx,out=DB);  
+                                             
+     And16(a=nx,b=QA,out=ytemp);
+     And16(a=ytemp,b=QB,out=y);
+
+}
